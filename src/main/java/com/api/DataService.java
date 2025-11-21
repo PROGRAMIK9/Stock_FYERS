@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.OffsetDateTime; // <-- Add this import
-import org.springframework.dao.EmptyResultDataAccessException; /
+import java.time.OffsetTime; // <-- Add this import
+import org.springframework.dao.EmptyResultDataAccessException; 
 
 @Service
 public class DataService {
@@ -36,7 +36,7 @@ public class DataService {
         rs.getString("type"),
         rs.getInt("qty"),
         rs.getDouble("price"),
-        rs.getObject("timestamp", OffsetDateTime.class) // How to read TIMESTAMPTZ
+        rs.getObject("timestamp", OffsetTime.class) // How to read TIMESTAMPTZ
     );
 
     // This runs the init code once, right after the app starts

@@ -21,14 +21,13 @@ public class StockController {
      * This is the new endpoint to get live Fyers data.
      */
 	@GetMapping("/fyers/quote")
-    public String getFyersQuote() {
+    public String getFyersQuote(@RequestParam("symbol") String symbol) {
         
         if (AuthController.ACCESS_TOKEN == null) {
             return "Error: Not authenticated. Please go to /auth/login first.";
         }
 
         RestTemplate restTemplate = new RestTemplate();
-        String symbol = "NSE:ONGC-EQ";
         // This data URL is correct
         String quoteUrl = "https://api-t1.fyers.in/data/quotes?symbols=" + symbol;
 
@@ -56,9 +55,10 @@ public class StockController {
     }
     // ... your other /hello or /stocks endpoints ...
 	@GetMapping("/fyers/history")
-    public String getStockHistory(@RequestParam String symbol) {
-        // Example: /fyers/history?symbol=NSE:SBIN-EQ
+    // FIX: Added ("symbol") inside the annotation
+    public String getStockHistory(@RequestParam("symbol") String symbol) {
         try {
+            // This calls your correctly written service method
             return fyersService.getHistory(symbol, "D", "2024-01-01", "2024-11-15");
         } catch (Exception e) {
             return "Error: " + e.getMessage();

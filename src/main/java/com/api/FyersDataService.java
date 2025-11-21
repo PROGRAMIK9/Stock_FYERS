@@ -7,7 +7,7 @@ import org.springframework.http.*;
 @Service
 public class FyersDataService {
 
-    private final String FYERS_DATA_URL = "https://api.fyers.in";
+    private final String FYERS_DATA_URL = "https://api-t1.fyers.in";
     private RestTemplate restTemplate = new RestTemplate();
 
     /**
@@ -37,7 +37,8 @@ public class FyersDataService {
             throw new RuntimeException("Not authenticated with Fyers. Call /auth/login first.");
         }
 
-        String historyUrl = UriComponentsBuilder.fromHttpUrl(FYERS_DATA_URL + "/data/v3/history")
+        @SuppressWarnings("deprecation")
+		String historyUrl = UriComponentsBuilder.fromHttpUrl(FYERS_DATA_URL + "/data/history")
             .queryParam("symbol", symbol)
             .queryParam("resolution", resolution)
             .queryParam("date_format", "1") // 1 = YYYY-MM-DD
