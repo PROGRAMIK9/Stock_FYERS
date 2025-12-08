@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
-
+import java.time.*;
 @RestController
 public class StockController {
     
@@ -59,7 +59,9 @@ public class StockController {
     public String getStockHistory(@RequestParam("symbol") String symbol) {
         try {
             // This calls your correctly written service method
-            return fyersService.getHistory(symbol, "D", "2024-01-01", "2024-11-15");
+        	LocalDate toDate = LocalDate.now();
+        	String to = toDate.toString();
+        	return fyersService.getHistory(symbol, "D", "2025-01-01", to);
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
