@@ -61,7 +61,7 @@ public class StockController {
             // This calls your correctly written service method
         	LocalDate toDate = LocalDate.now();
         	String to = toDate.toString();
-        	return fyersService.getHistory(symbol, "D", "2025-01-01", to);
+        	return fyersService.getHistory(symbol, "D", "2025-02-10", to);
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
